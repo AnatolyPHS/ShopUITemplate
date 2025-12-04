@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using Domains.Core;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Domains.Shop
+{
+    public class ShopMain : MonoBehaviour, IDomain
+    {
+        [SerializeField] private List<ShopBundle> availableBundles = new List<ShopBundle>();
+        [SerializeField] private string catalogSceneName = "ShopCatalogScene";
+        [SerializeField] private string bundleDetailSceneName = "ShopBundleDetailScene";
+        
+        private string clickedBundleId = null;
+        
+        public List<ShopBundle> AvailableBundles => availableBundles;
+        public ShopBundle ClickedBundle => availableBundles.Find(bundle => bundle.name == clickedBundleId);
+        
+        public void OnInfoBundleClicked(string bundleId)
+        {
+            clickedBundleId = bundleId;
+            SceneManager.LoadScene(bundleDetailSceneName, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(catalogSceneName);
+        }
+        
+        public void OnBackToCatalogClicked()
+        {
+            clickedBundleId = null;
+            SceneManager.LoadScene(catalogSceneName, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(bundleDetailSceneName);
+        }
+        
+        private void Start()
+        {
+            PlayerData.Instance.RegisterDomain<ShopMain>(this);
+            SceneManager.LoadScene(catalogSceneName, LoadSceneMode.Additive);
+        }
+
+        public void OnBuyClicked(string bundleId, Action onBuyComplete)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CanBuyBundle(string bundleId)
+        {
+            ShopBundle targetBundle = availableBundles.Find(bundle => bundle.Id == bundleId);
+            if (targetBundle == null)
+            {
+                Debug.LogError($"Can't find bundle {bundleId}");
+                return false;
+            }
+            
+            return targetBundle.CanBuy(PlayerData.Instance);
+        }
+    }
+}
