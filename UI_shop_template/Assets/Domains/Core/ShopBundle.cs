@@ -6,6 +6,7 @@ namespace Domains.Core
     [CreateAssetMenu(fileName = "ShopBundle", menuName = "Domains/ShopBundle", order = 0)]
     public class ShopBundle : ScriptableObject
     {
+        //TODO: mb better use GUID or enums or object id/hashcode or else
         [SerializeField] private string id;
         [SerializeField] private string shopName;
         

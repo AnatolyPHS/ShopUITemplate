@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40109c369d065a49a435c6903d54569, type: 3}
-  m_Name: HealthExchangeAction
+  m_Script: {fileID: 11500000, guid: ff6f6c1917677a242bcd2d29930dbb86, type: 3}
+  m_Name: Remove5GoldExchangeAction
   m_EditorClassIdentifier: 
-  healthChangeAmount: 10
+  goldAmount: -5

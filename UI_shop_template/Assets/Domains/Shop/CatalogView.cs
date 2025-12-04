@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Domains.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Domains.Shop
 {
     public class CatalogView : MonoBehaviour
     {
         [SerializeField] private BundleView bundleViewPrefab;
-        [SerializeField] private RectTransform bundleContainer;
-        [SerializeField] private float spacing = 15f;
+        [SerializeField] private HorizontalLayoutGroup bundleContainer;
 
         private void Start()
         {
@@ -16,7 +16,7 @@ namespace Domains.Shop
             List<ShopBundle> availableBundles = shopMain.AvailableBundles;
             foreach (ShopBundle bundle in availableBundles)
             {
-                BundleView bundleView = Instantiate(bundleViewPrefab, bundleContainer);
+                BundleView bundleView = Instantiate(bundleViewPrefab, bundleContainer.transform);
                 bundleView.Init(
                     shopMain,
                     bundle.Id,
@@ -29,11 +29,11 @@ namespace Domains.Shop
 
         private void ResizeBundleContainerWight(int availableBundlesCount)
         {
-            float bundleViewWidth = bundleViewPrefab.GetComponent<RectTransform>().rect.width;
-            float newWidth = availableBundlesCount * bundleViewWidth + (availableBundlesCount - 1) * spacing;
-            Vector2 sizeDelta = bundleContainer.sizeDelta;
-            sizeDelta.x = newWidth;
-            bundleContainer.sizeDelta = sizeDelta;
+            RectTransform rectTransform = bundleContainer.GetComponent<RectTransform>();
+            float bundleWidth = ((RectTransform)bundleViewPrefab.transform).rect.width;
+            float spacing = bundleContainer.spacing;
+            float totalWidth = availableBundlesCount * bundleWidth + (availableBundlesCount - 1) * spacing;
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalWidth);
         }
     }
 }

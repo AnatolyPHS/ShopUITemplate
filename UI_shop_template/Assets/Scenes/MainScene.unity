@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableBundles:
   - {fileID: 11400000, guid: 0fe097af5c6a94c43ba7e3829634b8e7, type: 2}
+  - {fileID: 11400000, guid: 60be0cc4e77109e4198b99633552806d, type: 2}
   catalogSceneName: ShopCatalogScene
   bundleDetailSceneName: ShopBundleDetailScene
 --- !u!4 &1708569735

@@ -15,7 +15,7 @@ namespace Domains.Shop
         private string clickedBundleId = null;
         
         public List<ShopBundle> AvailableBundles => availableBundles;
-        public ShopBundle ClickedBundle => availableBundles.Find(bundle => bundle.name == clickedBundleId);
+        public ShopBundle ClickedBundle => availableBundles.Find(bundle => bundle.Id == clickedBundleId);
         
         public void OnInfoBundleClicked(string bundleId)
         {
