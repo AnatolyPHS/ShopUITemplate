@@ -12,7 +12,9 @@ namespace Domains.Shop
         //TODO: remove the layout group
         [SerializeField] private HorizontalLayoutGroup bundleContainer;
         [SerializeField] private List<StatView> statViews = new List<StatView>();
-
+        
+        private readonly List<BundleView> availableBundleViews = new List<BundleView>();
+        
         private ShopMain shopMain;
         
         private void Start()
@@ -27,6 +29,7 @@ namespace Domains.Shop
                     bundle.Id,
                     bundle.ShopName 
                 );
+                availableBundleViews.Add(bundleView);
             }
             
             ResizeBundleContainerWight(availableBundles.Count);
@@ -55,6 +58,11 @@ namespace Domains.Shop
             for (var index = 0; index < statViews.Count; index++)
             {
                 statViews[index].RefresStathUI();
+            }
+            
+            for (var index = 0; index < availableBundleViews.Count; index++)
+            {
+                availableBundleViews[index].RefreshState();
             }
         }
 

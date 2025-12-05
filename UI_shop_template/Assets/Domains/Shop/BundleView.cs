@@ -21,7 +21,7 @@ public class BundleView : MonoBehaviour
         RefreshState();
     }
 
-    private void RefreshState()
+    public void RefreshState()
     {
         buyButton.interactable = shopMain.CanBuyBundle(bundleId);
     }
@@ -34,6 +34,6 @@ public class BundleView : MonoBehaviour
     public void OnBuyButtonClicked()
     {
         buyButton.interactable = false;
-        shopMain.OnBuyClicked(bundleId, RefreshState);
+        shopMain.OnBuyClicked(bundleId);
     }
 }

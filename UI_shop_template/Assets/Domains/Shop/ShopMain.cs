@@ -30,6 +30,11 @@ namespace Domains.Shop
         {
             RefreshShopUI -= listener;
         }
+
+        public void InvokeUIRefresh()
+        {
+            RefreshShopUI?.Invoke();
+        }
         
         public void OnInfoBundleClicked(string bundleId)
         {
@@ -52,28 +57,25 @@ namespace Domains.Shop
             fakeIAPController.Init();
         }
 
-        public void OnBuyClicked(string bundleId, Action onBuyComplete)
+        public void OnBuyClicked(string bundleId)
         {
-            ShopBundle targetBundle = availableBundles.Find(bundle => bundle.Id == bundleId);
-            if (targetBundle == null && fakeIAPController.CanBuyBundle(bundleId) == false)
+            if (CanBuyBundle(bundleId) == false)
             {
-                Debug.LogError($"Can't find bundle {bundleId}");
                 return;
             }
 
-            fakeIAPController.SimulateBuyProcess(bundleId, onBuyComplete, RefreshShopUI);
+            fakeIAPController.SimulateBuyProcess(bundleId);
         }
 
         public bool CanBuyBundle(string bundleId)
         {
             ShopBundle targetBundle = availableBundles.Find(bundle => bundle.Id == bundleId);
-            if (targetBundle == null)
+            if (targetBundle == null && fakeIAPController.CanBuyBundle(bundleId) == false)
             {
-                Debug.LogError($"Can't find bundle {bundleId}");
                 return false;
             }
             
-            return targetBundle.CanBuy(PlayerData.Instance);
+            return targetBundle.CanBuy(PlayerData.Instance) && fakeIAPController.CanBuyBundle(bundleId);
         }
     }
 }

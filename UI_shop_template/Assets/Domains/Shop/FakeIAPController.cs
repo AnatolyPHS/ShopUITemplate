@@ -20,20 +20,19 @@ namespace Domains.Shop
             shopMain = playerData.GetDomain<ShopMain>();
         }
         
-        public void SimulateBuyProcess(string bundleId, Action onBuyComplete, Action onShopUIRefresh)
+        public void SimulateBuyProcess(string bundleId)
         {
             FakeShopBuyDelay newDelay = new FakeShopBuyDelay
             {
                 bundleId = bundleId,
                 buyDate = DateTime.Now.AddSeconds(FakeBuyDelayDuration),
-                onBuy = onBuyComplete + onShopUIRefresh
             };
             fakeBuyDelays.Add(newDelay);
         }
 
         public bool CanBuyBundle(string bundleId)
         {
-            return fakeBuyDelays.Any(good => good.bundleId == bundleId);
+            return fakeBuyDelays.Any(good => good.bundleId == bundleId) == false;
         }
         
         private void Update()
@@ -51,8 +50,8 @@ namespace Domains.Shop
                 if (delay.buyDate <= now)
                 {
                     BuyBundle(delay.bundleId);
-                    delay.onBuy?.Invoke();
                     fakeBuyDelays.RemoveAt(i);
+                    shopMain.InvokeUIRefresh();
                 }
             }
         }
@@ -74,6 +73,5 @@ namespace Domains.Shop
     {
         public string bundleId;
         public DateTime buyDate;
-        public Action onBuy;
     }
 }
