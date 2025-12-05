@@ -11,11 +11,25 @@ namespace Domains.Shop
         [SerializeField] private List<ShopBundle> availableBundles = new List<ShopBundle>();
         [SerializeField] private string catalogSceneName = "ShopCatalogScene";
         [SerializeField] private string bundleDetailSceneName = "ShopBundleDetailScene";
+        //TODO: real IAP should be a domain as well
+        [SerializeField] private FakeIAPController fakeIAPController;
         
         private string clickedBundleId = null;
         
         public List<ShopBundle> AvailableBundles => availableBundles;
         public ShopBundle ClickedBundle => availableBundles.Find(bundle => bundle.Id == clickedBundleId);
+
+        private Action RefreshShopUI;
+        
+        public void AddRefreshShopUIListener(Action listener)
+        {
+            RefreshShopUI += listener;
+        }
+        
+        public void RemoveRefreshShopUIListener(Action listener)
+        {
+            RefreshShopUI -= listener;
+        }
         
         public void OnInfoBundleClicked(string bundleId)
         {
@@ -35,11 +49,19 @@ namespace Domains.Shop
         {
             PlayerData.Instance.RegisterDomain<ShopMain>(this);
             SceneManager.LoadScene(catalogSceneName, LoadSceneMode.Additive);
+            fakeIAPController.Init();
         }
 
         public void OnBuyClicked(string bundleId, Action onBuyComplete)
         {
-            throw new NotImplementedException();
+            ShopBundle targetBundle = availableBundles.Find(bundle => bundle.Id == bundleId);
+            if (targetBundle == null && fakeIAPController.CanBuyBundle(bundleId) == false)
+            {
+                Debug.LogError($"Can't find bundle {bundleId}");
+                return;
+            }
+
+            fakeIAPController.SimulateBuyProcess(bundleId, onBuyComplete, RefreshShopUI);
         }
 
         public bool CanBuyBundle(string bundleId)

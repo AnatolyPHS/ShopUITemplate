@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Domains.Gold
 {
-    [CreateAssetMenu(fileName = "GoldExchangeAction", menuName = "Domains/Gold/GoldExchangeAction", order = 0)]
+    [CreateAssetMenu(fileName = "GoldExchangeAction", menuName = "Domains/ExchangeAction/GoldExchangeAction", order = 0)]
     public class GoldExchangeAction : ExcahngeAction
     {
         [SerializeField] private int goldAmount = 5;

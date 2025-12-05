@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Domains.Health
 {
-    [CreateAssetMenu(fileName = "HealthExchangeAction", menuName = "Domains/Health/HealthExchangeAction", order = 1)]
+    [CreateAssetMenu(fileName = "HealthExchangeAction", menuName = "Domains/ExchangeAction/HealthExchangeAction", order = 1)]
     public class HealthExchangeAction : ExcahngeAction
     {
         [SerializeField] private int healthChangeAmount = 10;

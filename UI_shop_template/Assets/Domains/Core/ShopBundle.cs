@@ -28,5 +28,18 @@ namespace Domains.Core
 
             return true;
         }
+
+        public void Buy(PlayerData playerData)
+        {
+            foreach (ExcahngeAction action in SpendActions)
+            {
+                action.Perform(playerData);
+            }
+            
+            foreach (ExcahngeAction action in GainActions)
+            {
+                action.Perform(playerData);
+            }
+        }
     }
 }
