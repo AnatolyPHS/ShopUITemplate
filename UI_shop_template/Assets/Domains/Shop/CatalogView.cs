@@ -8,6 +8,8 @@ namespace Domains.Shop
 {
     public class CatalogView : MonoBehaviour
     {
+        private const int MaxBundlesInScreenView = 5;
+        
         [SerializeField] private BundleView bundleViewPrefab;
         //TODO: remove the layout group
         [SerializeField] private HorizontalLayoutGroup bundleContainer;
@@ -21,6 +23,8 @@ namespace Domains.Shop
         {
             shopMain = PlayerData.Instance.GetDomain<ShopMain>();
             List<ShopBundle> availableBundles = shopMain.AvailableBundles;
+            ResizeBundleContainerWight(availableBundles.Count);
+            
             foreach (ShopBundle bundle in availableBundles)
             {
                 BundleView bundleView = Instantiate(bundleViewPrefab, bundleContainer.transform);
@@ -31,8 +35,6 @@ namespace Domains.Shop
                 );
                 availableBundleViews.Add(bundleView);
             }
-            
-            ResizeBundleContainerWight(availableBundles.Count);
             
             shopMain.AddRefreshShopUIListener(RefreshUI);
 
@@ -46,11 +48,11 @@ namespace Domains.Shop
 
         private void ResizeBundleContainerWight(int availableBundlesCount)
         {
-            RectTransform rectTransform = bundleContainer.GetComponent<RectTransform>();
-            float bundleWidth = ((RectTransform)bundleViewPrefab.transform).rect.width;
-            float spacing = bundleContainer.spacing;
-            float totalWidth = availableBundlesCount * bundleWidth + (availableBundlesCount - 1) * spacing;
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalWidth);
+            float screenWidth = Screen.width;
+            float bundleViewWidth = screenWidth / (MaxBundlesInScreenView + 1);
+            float containerWidth = bundleViewWidth * availableBundlesCount;
+            RectTransform containerRect = bundleContainer.GetComponent<RectTransform>();
+            containerRect.sizeDelta = new Vector2(containerWidth, containerRect.sizeDelta.y);
         }
 
         private void RefreshUI()
