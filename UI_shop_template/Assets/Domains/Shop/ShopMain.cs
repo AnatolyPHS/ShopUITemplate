@@ -15,11 +15,12 @@ namespace Domains.Shop
         [SerializeField] private FakeIAPController fakeIAPController;
         
         private string clickedBundleId = null;
+        private Action RefreshShopUI;
         
+        public StatValueRepresenter StatValueRepresenter => null;
         public List<ShopBundle> AvailableBundles => availableBundles;
         public ShopBundle ClickedBundle => availableBundles.Find(bundle => bundle.Id == clickedBundleId);
-
-        private Action RefreshShopUI;
+        
         
         public void AddRefreshShopUIListener(Action listener)
         {

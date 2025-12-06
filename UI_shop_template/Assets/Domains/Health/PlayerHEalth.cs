@@ -6,18 +6,21 @@ namespace Domains.Health
     public class PlayerHEalth : MonoBehaviour, IDomain
     {
         [SerializeField] private int maxHealth = 100;
+        [SerializeField] private HealthValueRepresenter healthValueRepresenter;
         
         private int currentHealth;
         private bool isDead;
 
         public int CurrentHealth => currentHealth;
         public bool IsDead => isDead;
+        public StatValueRepresenter StatValueRepresenter => healthValueRepresenter;
 
         private void Start()
         {
             currentHealth = maxHealth;
             isDead = false;
             PlayerData.Instance.RegisterDomain<PlayerHEalth>(this);
+            healthValueRepresenter.Init(this);
         }
 
         public void ChangeHealth(int delta)

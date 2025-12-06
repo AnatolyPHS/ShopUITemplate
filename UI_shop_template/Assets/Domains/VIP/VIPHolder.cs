@@ -2,20 +2,29 @@ using System;
 using Domains.Core;
 using UnityEngine;
 
-public class VIPHolder : MonoBehaviour, IDomain
+namespace Domains.VIP
 {
-    private DateTime vipExpiryDate = DateTime.MinValue;
-    public bool IsVIP => DateTime.UtcNow < vipExpiryDate;
-    public TimeSpan VIPTimeRemains => IsVIP ? vipExpiryDate - DateTime.UtcNow : TimeSpan.Zero;
-    
-    private void Start()
+    public class VIPHolder : MonoBehaviour, IDomain
     {
-        PlayerData.Instance.RegisterDomain<VIPHolder>(this);
-    }
+        [SerializeField] private VIPValueRepresenter vipValueRepresenter;
+        
+        private DateTime vipExpiryDate = DateTime.MinValue;
     
-    public void AddVipDurationInSeconds(float seconds)
-    {
-        vipExpiryDate = IsVIP ? vipExpiryDate.AddSeconds(seconds) 
-            : DateTime.UtcNow.AddSeconds(seconds);
+        public StatValueRepresenter StatValueRepresenter => vipValueRepresenter;
+        public bool IsVIP => DateTime.UtcNow < vipExpiryDate;
+        public TimeSpan VIPTimeRemains => IsVIP ? vipExpiryDate - DateTime.UtcNow : TimeSpan.Zero;
+    
+    
+        private void Start()
+        {
+            PlayerData.Instance.RegisterDomain<VIPHolder>(this);
+            vipValueRepresenter.Initialize(this);
+        }
+    
+        public void AddVipDurationInSeconds(float seconds)
+        {
+            vipExpiryDate = IsVIP ? vipExpiryDate.AddSeconds(seconds) 
+                : DateTime.UtcNow.AddSeconds(seconds);
+        }
     }
 }

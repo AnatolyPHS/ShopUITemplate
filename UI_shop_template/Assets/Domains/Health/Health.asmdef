@@ -1,0 +1,16 @@
+{
+    "name": "HealthAD",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e88a0ac84d731ae468e31cc1f8107d95"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

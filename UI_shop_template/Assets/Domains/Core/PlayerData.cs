@@ -34,6 +34,16 @@ namespace Domains.Core
             }
         }
     
+        public IDomain GetDomain(Type domainType)
+        {
+            if (domainEntities.TryGetValue(domainType, out var entity))
+            {
+                return entity;
+            }
+        
+            throw new Exception($"Domain of type {domainType} not found.");
+        }
+        
         private void Awake()
         {
             if (Instance == null)

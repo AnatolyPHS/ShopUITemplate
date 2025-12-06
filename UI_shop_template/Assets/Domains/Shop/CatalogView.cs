@@ -59,7 +59,7 @@ namespace Domains.Shop
         {
             for (var index = 0; index < statViews.Count; index++)
             {
-                statViews[index].RefresStathUI();
+                statViews[index].RefreshStatRepresentation();
             }
             
             for (var index = 0; index < availableBundleViews.Count; index++)

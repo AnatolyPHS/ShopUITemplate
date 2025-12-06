@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.8
+  m_fontSize: 32.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.9
+  m_fontSize: 49.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 336380028531278907}
   - component: {fileID: 4455688333535200258}
   - component: {fileID: 4773496479959583969}
-  - component: {fileID: 8903822782193170177}
+  - component: {fileID: 1692085249931813262}
   m_Layer: 5
   m_Name: StatValue
   m_TagString: Untagged
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8903822782193170177
+--- !u!114 &1692085249931813262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,11 +357,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6933976682983434780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb579c64214c0b40967b26527598ea1, type: 3}
+  m_Script: {fileID: 11500000, guid: 20cc2327ccb57ec4c864546582d5c8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statValue: {fileID: 4154306063684471364}
   addButton: {fileID: 1656892646384803541}
+  domainReference: {fileID: 0}
 --- !u!1 &8053414018524714748
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,8 +484,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8903822782193170177}
-        m_TargetAssemblyTypeName: Domains.Shop.GoldStatView, Assembly-CSharp
+      - m_Target: {fileID: 1692085249931813262}
+        m_TargetAssemblyTypeName: Domains.Shop.StatViews.StatView, ShopAD
         m_MethodName: OnAddButtonClicked
         m_Mode: 1
         m_Arguments:
