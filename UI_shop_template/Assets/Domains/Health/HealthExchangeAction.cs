@@ -7,6 +7,8 @@ namespace Domains.Health
     public class HealthExchangeAction : ExcahngeAction
     {
         [SerializeField] private int healthChangeAmount = 10;
+        [SerializeField][Range(-1f, 1f)]
+        private float healthPercentageChange = 0f;
     
         public override bool CanPerforme(PlayerData pd)
         {
@@ -22,9 +24,11 @@ namespace Domains.Health
         public override void Perform(PlayerData pd)
         {
             var healthDomain = pd.GetDomain<PlayerHEalth>();
+            int healthDelta = (int)(healthPercentageChange * healthDomain.CurrentHealth);
+            healthDelta += healthChangeAmount;
             if (healthDomain != null)
             {
-                healthDomain.ChangeHealth(healthChangeAmount);
+                healthDomain.ChangeHealth(healthDelta);
             }
         }
     }

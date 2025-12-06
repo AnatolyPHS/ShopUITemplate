@@ -608,6 +608,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c23f5b1f10db3dd41bab626145282fb3, type: 2}
   - {fileID: 11400000, guid: d354e121359ec62459bde0e25f9773a5, type: 2}
   - {fileID: 11400000, guid: f0f32e4d481ca504d90b62bc81701fe3, type: 2}
+  - {fileID: 11400000, guid: 86f9e331ab450fd4da246a72b4fd2e26, type: 2}
   catalogSceneName: ShopCatalogScene
   bundleDetailSceneName: ShopBundleDetailScene
   fakeIAPController: {fileID: 346574762}
