@@ -7,8 +7,12 @@ using UnityEngine.UI;
 
 public class BundleView : MonoBehaviour
 {
+    private const string BuyButtonText = "Buy";
+    private const string ProcessingButtonText = "Processing...";
+    
     [SerializeField] private TextMeshProUGUI catalogNameText;
     [SerializeField] private Button buyButton;
+    [SerializeField] private TextMeshProUGUI buttonText;
     
     private ShopMain shopMain;
     private string bundleId;
@@ -24,6 +28,7 @@ public class BundleView : MonoBehaviour
     public void RefreshState()
     {
         buyButton.interactable = shopMain.CanBuyBundle(bundleId);
+        buttonText.text = shopMain.IsPurchaseInProgress(bundleId) ? ProcessingButtonText : BuyButtonText;
     }
 
     public void OnInfoButtonClicked()

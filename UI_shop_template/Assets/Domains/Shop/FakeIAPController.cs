@@ -67,6 +67,11 @@ namespace Domains.Shop
             
             targetBundle.Buy(playerData);
         }
+
+        public bool IsPurchaseInProgress(string bundleId)
+        {
+            return fakeBuyDelays.Any(good => good.bundleId == bundleId);
+        }
     }
     
     public class FakeShopBuyDelay

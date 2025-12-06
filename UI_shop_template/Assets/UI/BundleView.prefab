@@ -630,6 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catalogNameText: {fileID: 5844902239591898251}
   buyButton: {fileID: 5231792112595877494}
+  buttonText: {fileID: 3161199560390344899}
 --- !u!114 &12533992951118329
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -78,5 +78,10 @@ namespace Domains.Shop
             
             return targetBundle.CanBuy(PlayerData.Instance) && fakeIAPController.CanBuyBundle(bundleId);
         }
+
+        public bool IsPurchaseInProgress(string bundleId)
+        {
+            return fakeIAPController.IsPurchaseInProgress(bundleId);
+        }
     }
 }
