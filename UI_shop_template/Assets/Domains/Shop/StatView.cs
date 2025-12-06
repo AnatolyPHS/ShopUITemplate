@@ -11,7 +11,7 @@ namespace Domains.Shop.StatViews
         [SerializeField] private Button addButton;
         [SerializeField] private DomainReferenceSO domainReference;
         
-
+        private ShopMain shopMain;
         private StatValueRepresenter _statValueRepresenter;
         private string DomainClassName = "PlayerGold";
         
@@ -21,14 +21,19 @@ namespace Domains.Shop.StatViews
             addButton.gameObject.SetActive(true);
 #endif
             
+            shopMain = playerData.GetDomain<ShopMain>();
             IDomain domain = playerData.GetDomain(domainReference.DomainType);
             _statValueRepresenter = domain.StatValueRepresenter;
             _statValueRepresenter.AddStatVisual(this);
         }
 
-        public void RefreshStatRepresentation()
+        public void RefreshStatRepresentation(bool updateShopUI = false)
         {
             statValue.text = _statValueRepresenter.GetMainValue();
+            if (updateShopUI)
+            {
+                shopMain.InvokeUIRefresh();
+            }
         }
 
         public void OnAddButtonClicked()

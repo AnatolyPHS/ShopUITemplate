@@ -21,10 +21,16 @@ namespace Domains.VIP
             vipValueRepresenter.Initialize(this);
         }
     
-        public void AddVipDurationInSeconds(float seconds)
+        public void ChangeVipDurationInSeconds(float delta)
         {
-            vipExpiryDate = IsVIP ? vipExpiryDate.AddSeconds(seconds) 
-                : DateTime.UtcNow.AddSeconds(seconds);
+            if (delta < 0 && VIPTimeRemains.TotalSeconds < -delta)
+            {
+                vipExpiryDate = DateTime.UtcNow;
+                return;
+            }
+            
+            vipExpiryDate = vipExpiryDate < DateTime.UtcNow ? DateTime.UtcNow : vipExpiryDate;
+            vipExpiryDate = vipExpiryDate.AddSeconds(delta);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Domains.VIP
 
         public override void CheatChangeValue()
         {
-            vipHolder.AddVipDurationInSeconds(30f);
+            vipHolder.ChangeVipDurationInSeconds(30f);
         }
         
         private void Update()
@@ -36,7 +36,7 @@ namespace Domains.VIP
             nextTickTime = Time.time + tickDuration;
             foreach (var statVisual in statVisuals)
             {
-                statVisual.RefreshStatRepresentation();
+                statVisual.RefreshStatRepresentation(true);
             }
         }
     }

@@ -16,13 +16,18 @@ namespace Domains.VIP
                 return false;
             }
             
+            if(secondsToAdd < 0 && vipDomain.VIPTimeRemains.TotalSeconds < -secondsToAdd)
+            {
+                return false;
+            }
+            
             return true;
         }
 
         public override void Perform(PlayerData pd)
         {
             var vipDomain = pd.GetDomain<VIPHolder>();
-            vipDomain.AddVipDurationInSeconds(secondsToAdd);
+            vipDomain.ChangeVipDurationInSeconds(secondsToAdd);
         }
     }
 }

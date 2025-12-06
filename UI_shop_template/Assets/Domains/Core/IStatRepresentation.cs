@@ -4,6 +4,6 @@ namespace Domains.Core
 {
     public interface IStatRepresentation
     {
-        void RefreshStatRepresentation();
+        void RefreshStatRepresentation(bool updateShopUI = false);
     }
 }
